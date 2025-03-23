@@ -1,24 +1,28 @@
 #include <iostream>
 
 using namespace std;
+struct point
+    {
+      float  x,y;
+
+    };
 
 int main()
 {
-    int sz=10;
-    int* ap[sz];
+    point a;
+    point b;
+    point c;
 
-    cout<<"{";
-        for(int j=0;j<10;j++)
-        {
-                            // allocate NUMARRAYS arrays
-        *(ap+j) = new int[sz];     // each MAXSIZE ints long
+    cout<<"Enter Coordinates for p1: "<<endl;
+    cin>>a.x>>a.y;
 
-            for(int k=0;k<10;k++)
-            {
-                ap[j][k]=(j*10+k)*10;
-                cout<<ap[j][k]<<", ";
-            }
-        }
-     cout<<"}";
+
+   cout<<"Enter Coordinates for p2: "<<endl;
+    cin>>b.x>>b.y;
+
+    c.x=a.x+b.x;
+    c.y=a.y+b.y;
+cout<<"Coordinates of p1+p2 are: "<<c.x<<", "<<c.y<<endl;
 
     return 0;
+}
