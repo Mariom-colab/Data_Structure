@@ -38,7 +38,13 @@ public:
 
   // for debugging
   friend ostream& operator<<(ostream& os, const LinkedList<T>& list) {
-
+     Node<T>* temp = list.head;
+        while (temp != nullptr) {
+            os << temp->data << " -> ";
+            temp = temp->next;
+        }
+        os << "NULL";
+        return os;
   }
 
   // insert a new node at the given index
@@ -65,6 +71,16 @@ public:
 
   // remove the node at the given index
   void removeAt(int index) {
+      Node<T> *temp1=head;
+        Node<T> *temp2=head;
+
+      if(size==0)throw"Empty!!";
+      else if (index == 0) {
+        temp2 = head;
+        head = head->next;
+        delete temp2;
+    }
+    else{
 
         Node<T> *temp1=head;
         Node<T> *temp2=head;
@@ -78,14 +94,15 @@ public:
                   temp1=temp1->next;
                   delete temp2;
 
-
+    }
+    size--;
 
   }
 
   // return the node at the given index
   T operator[](int index) {
 
-      T* E;
+      Node<T>* E;
       E=head;
       for(int i=0;i<index;i++)
       {
@@ -98,7 +115,7 @@ public:
 
   // insert a new node at the end of the list
   void insertLast(const T& data) {
-      Node* E;
+      Node<T>* E;
       E=head;
 
       Node<T>* newcar = new Node<T>();
@@ -116,18 +133,24 @@ public:
   // remove the last node
   void removeLast() {
       if(size==0)throw"Empty!!";
+    else if (head->next == NULL) {
+        delete head;
+        head = NULL;
+    }
+    else {
+    Node<T>* E;
+     Node<T>* F = head->next;
 
-    Node* E,*F;
       E=head;
       F=E->next;
-      while(F->next==NULL)
+      while(F->next!=NULL)
       {
           E=E->next;
           F=F->next;
       }
-      ~LinkedList F;
+     delete F;
       E->next=NULL;
-
+    }
     size--;
   }
 
@@ -136,9 +159,9 @@ public:
   void insertFirst(const T& data) {
       Node<T>* newcar=new Node<T>;
       newcar->data=data;
-      newcr->next=head->next;
+      newcar->next=head->next;
       head=newcar;
-
+    size++;
   }
 
   // remove the first node
@@ -147,9 +170,12 @@ public:
         temp=head;
         head=head->next;
 
-        ~LinkedList temp;
+        delete temp;
 
 
 
   }
+  bool isEmpty() {
+    return head == NULL;
+    //return size==0;
 };
